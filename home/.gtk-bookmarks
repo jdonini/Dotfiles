@@ -1,7 +1,7 @@
-file:/// /
-file:///etc /etc
-file:///usr /usr
-file://$HOME ~
-file://$HOME/.config ~/.config
-file://$HOME/Documents ~/Documents
-file://$HOME/Downloads ~/Downloads
+file:// /
+file://etc /etc
+file://usr /usr
+file://home/juliano ~
+file://home/juliano/.config ~/.config
+file://home/juliano/Documents ~/Documents
+file://home/juliano/Downloads ~/Downloads

@@ -3,7 +3,7 @@
 ln -sf /usr/share/zoneinfo/America/Sao_Paulo /etc/localtime
 hwclock --systohc
 
-pacman -S grub mtools dosfstools reflector base-devel linux-headers xdg-user-dirs xdg-utils gvfs bash-completion rsync acpi acpi_call acpid upower openbsd-netcat iptables-nft ipset firewalld flatpak os-prober ntfs-3g
+pacman -S docker docker-compose grub mtools dosfstools reflector base-devel linux-headers xdg-user-dirs xdg-utils gvfs bash-completion rsync acpi acpi_call acpid upower openbsd-netcat iptables-nft ipset firewalld flatpak os-prober ntfs-3g
 
 grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB
 grub-mkconfig -o /boot/grub/grub.cfg

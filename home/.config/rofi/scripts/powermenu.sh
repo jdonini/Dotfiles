@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 theme="powermenu"
-dir="$HOME/.config/rofi/themes"
+dir="/home/juliano/.config/rofi/themes"
 
 uptime=$(uptime -p | sed -e 's/up //g')
 

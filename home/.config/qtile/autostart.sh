@@ -9,7 +9,7 @@
 
 
 nitrogen --restore &
-picom -b --config $HOME/.config/picom/picom.conf &
+picom -b --config /home/juliano/.config/picom/picom.conf &
 lxsession &
 volumeicon &
 

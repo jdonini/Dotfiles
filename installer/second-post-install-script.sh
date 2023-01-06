@@ -8,13 +8,13 @@
 ## This installer script:
 ##		* sets up sudo configurations
 
-cp -r $HOME/Dotfiles/root/bin/* /bin/
-cp -r $HOME/Dotfiles/root/etc/environment /etc/
-cp -r $HOME/Dotfiles/root/etc/isw.conf /etc/
-cp -r $HOME/Dotfiles/root/etc/default/zramd /etc/default/zramd
-cp -r $HOME/Dotfiles/root/etc/systemd/system/* /etc/systemd/system/
-cp -r $HOME/Dotfiles/root/usr/share/themes/Vault /usr/share/themes/
-cp -r $HOME/Dotfiles/root/etc/xdg/reflector/reflector.conf /etc/xdg/reflector/
+cp -r /home/juliano/Dotfiles/root/bin/* /bin/
+cp -r /home/juliano/Dotfiles/root/etc/environment /etc/
+cp -r /home/juliano/Dotfiles/root/etc/isw.conf /etc/
+cp -r /home/juliano/Dotfiles/root/etc/default/zramd /etc/default/zramd
+cp -r /home/juliano/Dotfiles/root/etc/systemd/system/* /etc/systemd/system/
+cp -r /home/juliano/Dotfiles/root/usr/share/themes/Vault /usr/share/themes/
+cp -r /home/juliano/Dotfiles/root/etc/xdg/reflector/reflector.conf /etc/xdg/reflector/
 
 chmod +x /bin/newsboat-fix
 chmod +x /bin/silence-fan

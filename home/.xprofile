@@ -2,8 +2,8 @@
 
 # sourced at boot by ~/.xinitrc and most display managers
 
-export XDG_CONFIG_HOME="$HOME/.config"
-export PATH="$HOME/.local/bin:$PATH"
+export XDG_CONFIG_HOME="/home/juliano/.config"
+export PATH="/home/juliano/.local/bin:$PATH"
 export RANGER_LOAD_DEFAULT_RC=FALSE
 export QT_QPA_PLATFORMTHEME=qt5ct
 export EDITOR=nvim
