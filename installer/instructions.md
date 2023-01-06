@@ -73,9 +73,9 @@
 * Edit script first with neovim to include chosen username, passwords, hostname, etc.
 * Change name of folder for easy typing and run script
 
-  > chmod +x ./Dotfiles/installer/first-install-script.sh
+  > chmod +x ./Dotfiles/installer/1-install-script.sh
 
-  > ./Dotfiles/installer/first-install-script.sh
+  > ./Dotfiles/installer/1-install-script.sh
 
 * Follow prompts
 
@@ -107,13 +107,13 @@
 
  > sudo pacman -Syu
 
-20. Run post-install script
+20. Run 2-install script
 
  > sudo chown -R juliano:users ./Dotfiles/*
 
- > chmod +x ~/Dotfiles/installer/post-install-script.sh
+ > chmod +x ~/Dotfiles/installer/2-install-script.sh
 
-    > ~/Dotfiles/installer/post-install-script.sh
+    > ~/Dotfiles/installer/2-install-script.sh
 
 * Follow prompts.
         *Install wireplumber instead of pipewire-media-session
@@ -134,13 +134,21 @@
 
  > sudo mkinitcpio -p linux
 
-23. Become super-user and run second post-install script
+23. Become super-user and run 3 post-install script
 
  > sudo su
 
- > chmod +x ~/Dotfiles/installer/second-post-install-script.sh
+ > chmod +x ~/Dotfiles/installer/3-post-install-script.sh
 
- > Dotfiles/installer/second-post-install-script.sh
+ > Dotfiles/installer/3-post-install-script.sh
+
+24. Become super-user and run 4 post-install script
+
+ > sudo su
+
+ > chmod +x ~/Dotfiles/installer/4-post-install-script.sh
+
+ > Dotfiles/installer/4-post-install-script.sh
 
 24. Reboot into newly configured system
 
