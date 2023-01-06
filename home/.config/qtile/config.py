@@ -3,17 +3,18 @@ import socket
 import subprocess
 from datetime import datetime
 from typing import List
-from libqtile import bar, layout, widget, hook
-from libqtile import qtile
-from libqtile.config import Key, Screen, Group, Drag, Match
+
+from libqtile import bar, hook, layout, qtile, widget
+from libqtile.config import Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
 
 # Theme Choice
 from themes import dracula
+
 colors = dracula.init_colors()
 
-#from themes import vault
-#colors = vault.init_colors()
+# from themes import vault
+# colors = vault.init_colors()
 
 
 mod = "mod4"
@@ -27,120 +28,115 @@ terminal = "kitty"
 browser = "brave"
 
 keys = [
-
-# POWER KEYS
+    # POWER KEYS
     Key([mod], "q", lazy.window.kill(), desc="Kill focused window"),
     Key([mod, "shift"], "r", lazy.restart(), desc="Restart Qtile"),
     Key([mod, "shift"], "q", lazy.spawn(home + "/.config/rofi/scripts/powermenu.sh")),
-
-# APPS AND LAUNCHERS
-# SUPER KEY
-    Key([mod], "space", 
-        lazy.spawn("dmenu_run"), desc="dmenu"),
-    Key([mod], "t", 
-        lazy.spawn("timeshift-launcher"), desc="timeshift"),
-    Key([mod], "Return", 
-        lazy.spawn(terminal), desc="kitty"),
-    Key([mod], "b", 
-        lazy.spawn(browser), desc="brave"),
-    Key([mod], "c", 
-        lazy.spawn("code"), desc="vscode"),
-    Key([mod], "f", 
-        lazy.spawn("pcmanfm"), desc="file manager"),
-    Key([mod], "h", 
-        lazy.spawn(terminal + " htop"), desc="htop"),
-    Key([mod], "v", 
-        lazy.spawn(terminal + " nvim"), desc="nvim"),
-    Key([mod], "w", 
-        lazy.spawn("qutebrowser"), desc="qutebrowser"),
-    Key([mod], "d",
-        lazy.spawn(home + "/.config/rofi/scripts/floating_launcher.sh"), desc="rofi"),
-    Key([mod], "m", 
-        lazy.spawn("mullvad-vpn"), desc="mullvad vpn"),
-    Key([mod], "r", 
-        lazy.spawn(home + "/.local/bin/newsboat-fix"), desc="RSS newsboat"),
-    Key([mod], "g", 
-        lazy.spawn("github-desktop"), desc="github desktop"),
-    Key([mod], "i", 
-        lazy.spawn("inkscape"), desc="inkscape"),
-    Key([mod], "s",
-        lazy.spawn("steam"), desc="steam"),
-    Key([mod], "n", 
-        lazy.spawn("notion-app-enhanced"), desc="notion"),
-    Key([mod, "shift"], 
-        "s", lazy.spawn("stacer"), desc="stacer"),
-    Key([mod, "shift"], 
-        "t", lazy.spawn("lxtask"), desc="task manager"),
-
-# MULTIMEDIA/OTHER FUNCTIONS
-    
+    # APPS AND LAUNCHERS
+    # SUPER KEY
+    Key([mod], "space", lazy.spawn("dmenu_run"), desc="dmenu"),
+    Key([mod], "t", lazy.spawn("timeshift-launcher"), desc="timeshift"),
+    Key([mod], "Return", lazy.spawn(terminal), desc="kitty"),
+    Key([mod], "b", lazy.spawn(browser), desc="brave"),
+    Key([mod], "c", lazy.spawn("code"), desc="vscode"),
+    Key([mod], "f", lazy.spawn("pcmanfm"), desc="file manager"),
+    Key([mod], "h", lazy.spawn(terminal + " htop"), desc="htop"),
+    Key([mod], "v", lazy.spawn(terminal + " nvim"), desc="nvim"),
+    Key([mod], "w", lazy.spawn("brave"), desc="brave"),
+    Key(
+        [mod],
+        "d",
+        lazy.spawn(home + "/.config/rofi/scripts/floating_launcher.sh"),
+        desc="rofi",
+    ),
+    Key([mod], "m", lazy.spawn("mullvad-vpn"), desc="mullvad vpn"),
+    Key([mod], "r", lazy.spawn(home + "/.local/bin/newsboat-fix"), desc="RSS newsboat"),
+    Key([mod], "g", lazy.spawn("github-desktop"), desc="github desktop"),
+    Key([mod], "i", lazy.spawn("inkscape"), desc="inkscape"),
+    Key([mod], "s", lazy.spawn("steam"), desc="steam"),
+    Key([mod], "n", lazy.spawn("notion-app-enhanced"), desc="notion"),
+    Key([mod, "shift"], "s", lazy.spawn("stacer"), desc="stacer"),
+    Key([mod, "shift"], "t", lazy.spawn("lxtask"), desc="task manager"),
+    # MULTIMEDIA/OTHER FUNCTIONS
     # INCREASE/DECREASE BRIGHTNESS
     Key([], "XF86MonBrightnessUp", lazy.spawn("brightnessctl s +5%")),
     Key([], "XF86MonBrightnessDown", lazy.spawn("brightnessctl s 5%-")),
-    
     # INCREASE/DECREASE/MUTE VOLUME
     Key([], "XF86AudioMute", lazy.spawn("amixer -q sset Master toggle")),
     Key([], "XF86AudioLowerVolume", lazy.spawn("amixer -q sset Master 5%-")),
     Key([], "XF86AudioRaiseVolume", lazy.spawn("amixer -q sset Master 5%+")),
-    
     # Print Screen
     Key(
-        [mod1, "shift"], "F12",
-        lazy.spawn("scrot 'ArchLinux-%Y-%m-%d-%s_screenshot_$wx$h.jpg' -e 'mv $f $$(xdg-user-dir PICTURES)'")),
+        [mod1, "shift"],
+        "F12",
+        lazy.spawn(
+            "scrot 'ArchLinux-%Y-%m-%d-%s_screenshot_$wx$h.jpg' -e 'mv $f $$(xdg-user-dir PICTURES)'"
+        ),
+    ),
     Key(
-        [mod1, "shift"], "s",
-        lazy.spawn("scrot 'ArchLinux-%Y-%m-%d-%s_screenshot_$wx$h.jpg' -e 'mv $f $$(xdg-user-dir PICTURES)'")),
+        [mod1, "shift"],
+        "s",
+        lazy.spawn(
+            "scrot 'ArchLinux-%Y-%m-%d-%s_screenshot_$wx$h.jpg' -e 'mv $f $$(xdg-user-dir PICTURES)'"
+        ),
+    ),
     Key(
-        [mod], "F12",
-        lazy.spawn("scrot 'ArchLinux-%Y-%m-%d-%s_screenshot_$wx$h.jpg' -e 'mv $f $$(xdg-user-dir PICTURES)'")),
-
-
-# QTILE KEYS
-# CTRL 
+        [mod],
+        "F12",
+        lazy.spawn(
+            "scrot 'ArchLinux-%Y-%m-%d-%s_screenshot_$wx$h.jpg' -e 'mv $f $$(xdg-user-dir PICTURES)'"
+        ),
+    ),
+    # QTILE KEYS
+    # CTRL
     # Switch between windows
     Key([mod2], "Left", lazy.layout.left(), desc="Move focus to left"),
     Key([mod2], "Right", lazy.layout.right(), desc="Move focus to right"),
     Key([mod2], "Down", lazy.layout.down(), desc="Move focus down"),
     Key([mod2], "Up", lazy.layout.up(), desc="Move focus up"),
-   
     # Move windows between left/right columns or move up/down in current stack.
     # Moving out of range in Columns layout will create new column.
     Key([mod2, "shift"], "Left", lazy.layout.shuffle_left()),
     Key([mod2, "shift"], "Right", lazy.layout.shuffle_right()),
     Key([mod2, "shift"], "Down", lazy.layout.shuffle_down()),
     Key([mod2, "shift"], "Up", lazy.layout.shuffle_up()),
-    
     # Grow windows. If current window is on the edge of screen and direction
     # will be to screen edge - window would shrink.
-    Key([mod, mod2], "Right",
+    Key(
+        [mod, mod2],
+        "Right",
         lazy.layout.grow_right(),
         lazy.layout.grow(),
         lazy.layout.increase_ratio(),
         lazy.layout.delete(),
     ),
-    Key([mod, mod2], "Left",
+    Key(
+        [mod, mod2],
+        "Left",
         lazy.layout.grow_left(),
         lazy.layout.shrink(),
         lazy.layout.decrease_ratio(),
         lazy.layout.add(),
     ),
-    Key([mod, mod2], "Up",
+    Key(
+        [mod, mod2],
+        "Up",
         lazy.layout.grow_up(),
         lazy.layout.grow(),
         lazy.layout.decrease_nmaster(),
     ),
-    Key([mod, mod2], "Down",
+    Key(
+        [mod, mod2],
+        "Down",
         lazy.layout.grow_down(),
         lazy.layout.shrink(),
         lazy.layout.increase_nmaster(),
     ),
-
     # Layout changing
     Key([mod2], "space", lazy.next_layout(), desc="Toggle between layouts"),
     Key([mod2, "shift"], "n", lazy.layout.normalize(), desc="Reset all window sizes"),
     Key([mod2, "shift"], "m", lazy.window.toggle_fullscreen()),
     Key([mod2, "shift"], "f", lazy.window.toggle_floating()),
-    
     # Treetab controls
     Key(
         [mod2, mod1],
@@ -565,10 +561,12 @@ def init_widgets_screen1():
     widgets_screen1 = init_widgets_list()
     return widgets_screen1
 
+
 def init_screens():
     return [
         Screen(top=bar.Bar(widgets=init_widgets_screen1(), size=26, opacity=1)),
     ]
+
 
 screens = init_screens()
 
@@ -615,7 +613,8 @@ floating_types = ["notification", "toolbar", "splash", "dialog"]
 follow_mouse_focus = True
 bring_front_click = False
 cursor_warp = False
-floating_layout =layout.Floating(**layout_theme,
+floating_layout = layout.Floating(
+    **layout_theme,
     float_rules=[
         # Run the utility of `xprop` to see the wm class and name of an X client.
         *layout.Floating.default_float_rules,
@@ -627,9 +626,9 @@ floating_layout =layout.Floating(**layout_theme,
         Match(title="pinentry"),
         Match(wm_class="dialog"),
         Match(wm_class="download"),
-        Match(wm_class='steam'),
+        Match(wm_class="steam"),
         Match(wm_class="error"),  # GPG key password entry
-    ] 
+    ]
 )
 
 auto_fullscreen = True

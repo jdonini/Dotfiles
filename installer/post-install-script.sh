@@ -36,7 +36,6 @@ cp -r ~/Dotfiles/home/.config/newsboat ~/.config/
 cp -r ~/Dotfiles/home/.config/nvim ~/.config/
 cp -r ~/Dotfiles/home/.config/nwg-launchers ~/.config/
 cp -r ~/Dotfiles/home/.config/picom ~/.config/
-cp -r ~/Dotfiles/home/.config/qutebrowser ~/.config/
 cp -r ~/Dotfiles/home/.config/ranger ~/.config/
 cp -r ~/Dotfiles/home/.config/volumeicon ~/.config/
 cp -r ~/Dotfiles/home/.config/rofi ~/.config/

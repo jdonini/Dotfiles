@@ -119,8 +119,6 @@
         *Install wireplumber instead of pipewire-media-session
         * Use xdg-desktop-portal-gtk
 
-  * Important: Install zramd and mullvad-vpn manually after this, as they tend to have issues in installer script
-
 21. Configure grub to work with MSI fan
 
  > sudo nvim /etc/default/grub

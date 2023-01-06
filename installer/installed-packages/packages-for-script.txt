@@ -69,11 +69,9 @@ lxtask-gtk3
 mediainfo
 mesa-utils
 mpv
+mullvad-vpn
 neofetch
 neovim
-nerd-fonts-fira-code
-nerd-fonts-hack
-nerd-fonts-jetbrains-mono
 network-manager-applet
 networkmanager
 newsboat
@@ -116,7 +114,6 @@ python-setuptools
 qgis
 qt5ct
 qtile
-qutebrowser
 ranger
 rebuild-detector
 redshift
@@ -142,7 +139,6 @@ ttf-iosevka-term
 ttf-joypixels
 ttf-ms-fonts
 ttf-roboto-mono
-ttf-windows
 tumbler
 unrar
 upd72020x-fw
@@ -151,7 +147,6 @@ vlc
 visual-studio-code-bin
 vkd3d
 volumeicon
-vulkan-devel
 wd719x-firmware
 wget
 wpa_supplicant
