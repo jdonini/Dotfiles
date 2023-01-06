@@ -81,7 +81,7 @@
 
 14. Move Dotfiles repo
 
- > mv Dotfiles /home/annie/
+ > mv Dotfiles /home/juliano/
 
 15. Exit and reboot
 
@@ -109,7 +109,7 @@
 
 20. Run post-install script
 
- > sudo chown -R annie:users ./Dotfiles/*
+ > sudo chown -R juliano:users ./Dotfiles/*
 
  > chmod +x ~/Dotfiles/installer/post-install-script.sh
 

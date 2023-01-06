@@ -1,22 +1,20 @@
 #!/bin/bash
 
-ln -sf /usr/share/zoneinfo/America/New_York /etc/localtime
+ln -sf /usr/share/zoneinfo/America/Sao_Paulo /etc/localtime
 hwclock --systohc
 sed -i '177s/.//' /etc/locale.gen
 locale-gen
 echo "LANG=en_US.UTF-8" >> /etc/locale.conf
 echo "KEYMAP=us" >> /etc/vconsole.conf
-echo "computer" >> /etc/hostname
+echo "archlinux" >> /etc/hostname
 echo "127.0.0.1 localhost" >> /etc/hosts
 echo "::1       localhost" >> /etc/hosts
-echo "127.0.1.1 computer.localdomain computer" >> /etc/hosts
+echo "127.0.1.1 archlinux.localdomain archlinux" >> /etc/hosts
 
 # replace <PASSWORD> with chosen password
 echo root:<PASSWORD> | chpasswd
 
-pacman -S grub efibootmgr networkmanager network-manager-applet dialog wpa_supplicant mtools dosfstools reflector base-devel linux-headers xdg-user-dirs xdg-utils gvfs bash-completion rsync reflector acpi acpi_call acpid upower openbsd-netcat iptables-nft ipset firewalld flatpak os-prober ntfs-3g
-
-pacman -S nvidia xf86-video-intel nvidia-settings nvidia-utils
+pacman -S grub mtools dosfstools reflector base-devel linux-headers xdg-user-dirs xdg-utils gvfs bash-completion rsync acpi acpi_call acpid upower openbsd-netcat iptables-nft ipset firewalld flatpak os-prober ntfs-3g
 
 grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB
 grub-mkconfig -o /boot/grub/grub.cfg
@@ -25,12 +23,15 @@ systemctl enable NetworkManager
 systemctl enable fstrim.timer
 systemctl enable firewalld
 
-# Create user annie
-useradd -m annie
+systemctl start docker.service
+systemctl enable docker.service 
+
+# Create user juliano
+useradd -m juliano
 
 # replace <PASSWORD> with chosen password
-echo annie:<PASSWORD> | chpasswd
-usermod -aG wheel annie
+echo juliano:<PASSWORD> | chpasswd
+usermod -aG wheel juliano
 
 # change permissions for wheel group
 echo "%wheel ALL=(ALL) ALL" >> /etc/sudoers
