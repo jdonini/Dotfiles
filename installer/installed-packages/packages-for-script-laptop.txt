@@ -1,2 +1,3 @@
 optimus-manager
 optimus-manager-qt
+brightnessctl
