@@ -10,12 +10,12 @@ DEFAULT_FONT = "Hack Nerd Font"
 
 AUTOSTART_APPS = [
     # run arandr
-    "killall -qw xrandr; xrandr --output DP-3 --mode 1920x1080 --pos 0x0 --rotate left --output DP-5 --primary --mode 1920x1080 --pos 1080x0 --rotate normal &",
+    "killall -qw xrandr; xrandr --output HDMI-0 --mode 1920x1080 --pos 3000x0 --rotate right --output DP-1 --primary --mode 1920x1080 --pos 1080x0 --rotate normal --output DP-3 --mode 1920x1080 --pos 0x0 --rotate left &",
     # set auto-repeat delay and rate
     "xset r rate 300 25",
     # trigger session lock after 5 minutes of inactivity,
     # turn display off 2 minutes later
-    "xset s 3000; xss-lock -- ~/.local/bin/lock-screen &",
+    "xset s 30000; xss-lock -- ~/.local/bin/lock-screen &",
     # run window compositor (restart if running already)
     "killall -qw picom; picom -b",
     # run notification daemon
@@ -26,10 +26,16 @@ AUTOSTART_APPS = [
     "flameshot &",
     # run deluge
     "deluge-gtk &",
-    # run discord
-    "discord &",
+    # run Franz
+    "franz &",
     # nitrogen
     "nitrogen --restore &",
+    # enpass
+    "enpass &",
+    # insync
+    "insync start &",
+    # Power Manager
+    "xfce4-power-manager &",
 ]
 """
 Shell commands which will be started each time Qtile starts in the order that
@@ -45,6 +51,7 @@ backlight control interface
 """
 
 SET_BRIGHTNESS_SHELL_CMD = "brightnessctl set {}%"
+
 """
 Shell command template to set screen brightness
 """
@@ -67,7 +74,7 @@ LOCK_X_SESSION_SHELL_CMD = "loginctl lock-session"
 Shell command to lock X session
 """
 
-KEYBOARD_DISPLAY = {"us intl": "us intl", "us": "us"}
+KEYBOARD_DISPLAY = {"us intl": "us intl"}
 KEYBOARD_LAYOUTS = list(KEYBOARD_DISPLAY.keys())
 
 """

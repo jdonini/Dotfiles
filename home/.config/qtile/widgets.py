@@ -2,6 +2,7 @@
 Custom Qtile widgets live here
 """
 from typing import NamedTuple
+import dbus
 
 from libqtile import widget
 from libqtile.log_utils import logger

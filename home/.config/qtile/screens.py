@@ -10,8 +10,6 @@ import widgets
 from colors import color_schema
 from utils import (
     ARE_SPEAKERS_MUTED_SHELL_CMD,
-    BLUETOOTH_DEVICE_HCI_PATH,
-    BRIGHTNESS_DIR,
     DEFAULT_FONT,
     GET_MICROPHONE_VOLUME_SHELL_CMD,
     GET_SPEAKERS_VOLUME_SHELL_CMD,
@@ -21,11 +19,10 @@ from utils import (
     KEYBOARD_LAYOUTS,
     LOWER_SPEAKERS_VOLUME_SHELL_CMD,
     RAISE_SPEAKERS_VOLUME_SHELL_CMD,
-    SET_BRIGHTNESS_SHELL_CMD,
     TOGGLE_MICROPHONE_MUTE_SHELL_CMD,
     TOGGLE_SPEAKERS_MUTE_SHELL_CMD,
-    WALLPAPER_PATH,
 )
+
 
 widget_defaults = dict(
     font=DEFAULT_FONT,
@@ -37,12 +34,8 @@ widget_defaults = dict(
 extension_defaults = widget_defaults.copy()
 separator = widget.Sep(size_percent=50, foreground=color_schema["fg3"])
 
-window_name = widget.WindowName()
-
 screens = [
     Screen(
-        # wallpaper=WALLPAPER_PATH,
-        # wallpaper_mode="fill",
         top=bar.Bar(
             [
                 widget.GroupBox(
@@ -62,7 +55,6 @@ screens = [
                     scale=0.5,
                     padding=0,
                 ),
-                widget.CurrentLayout(padding=0),
                 widget.Spacer(),
                 widget.Clock(format="%d %b %I:%M %p"),
                 widget.Spacer(),
@@ -76,6 +68,11 @@ screens = [
                     no_connection_format_string="{icon} {network_name} "
                     "(no connection)",
                     update_interval=5,
+                ),
+                widget.Net(
+                    interface="wlan0",
+                    format="{down} ↓↑ {up}",
+                    update_interval=2,
                 ),
                 separator,
                 widgets.Volume(
@@ -97,13 +94,64 @@ screens = [
                     update_interval=1,
                 ),
                 separator,
-                # widgets.Battery(update_interval=60),
-                # widget.Backlight(
-                #     backlight_name=BRIGHTNESS_DIR,
-                #     change_command=SET_BRIGHTNESS_SHELL_CMD,
-                #     format=" {percent:2.0%}",
-                # ),
                 widget.Systray(fontsize=12, scale=0.5),
+            ],
+            30,
+            margin=[5, 5, 0, 5],
+        ),
+    ),
+    Screen(
+        top=bar.Bar(
+            [
+                widget.Spacer(),
+                widget.Memory(
+                    format=": {MemUsed:.2f}/{MemTotal:.2f}{mm}",
+                    update_interval=1.0,
+                    measure_mem="G",
+                ),
+                separator,
+                widget.DF(
+                    partition="/home",
+                    visible_on_warn=False,
+                    format=" {uf}{m}|{r:.0f}%",
+                    measure="G",
+                    warn_color=color_schema["red"],
+                    warn_space=40,
+                ),
+                separator,
+                widget.CPU(format="󰘷 {freq_current}GHz {load_percent}%"),
+                widget.ThermalSensor(
+                    tag_sensor="Tctl",
+                    format="{temp:.0f}{unit}",
+                    update_interval=2,
+                    threshold=70,
+                    foreground=color_schema["fg"],
+                ),
+                separator,
+                widget.NvidiaSensors(
+                    format=" {temp}°C",
+                    update_interval=2,
+                    threshold=85,
+                    foreground_alert=color_schema["red"],
+                    foreground=color_schema["fg"],
+                ),
+                separator,
+                widget.Mpris2(
+                    name="spotify",
+                    paused_text=" : {track}",
+                    stop_text="  ",
+                    display_metadata=["xesam:title", "xesam:artist"],
+                    objname="org.mpris.MediaPlayer2.spotify",
+                    scroll_interval=0.3,
+                ),
+                widget.CheckUpdates(
+                    colour_have_updates=color_schema["dark-cyan"],
+                    no_update_string="",
+                    display_format="{updates}",
+                    update_interval=600,
+                    custom_command="checkupdates",
+                    fmt="   {}",
+                ),
             ],
             30,
             margin=[5, 5, 0, 5],
@@ -129,10 +177,7 @@ screens = [
                     scale=0.5,
                     padding=0,
                 ),
-                widget.CurrentLayout(padding=0),
-                window_name,
-                widget.Memory(measure_mem="G"),
-                separator,
+                widget.Spacer(),
                 widget.CryptoTicker(crypto="ETH", format="{crypto}:{amount:,.0f}"),
                 widget.CryptoTicker(crypto="BTC", format="{crypto}:{amount:,.0f}"),
                 separator,
@@ -141,7 +186,6 @@ screens = [
                     fmt=" {}",
                     display=KEYBOARD_DISPLAY,
                 ),
-                widget.CheckUpdates(),
             ],
             30,
             margin=[5, 5, 0, 5],

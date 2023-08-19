@@ -20,6 +20,7 @@ layouts = [
     layout.Floating(**floating_defaults),
     layout.Max(**layout_defaults),
     layout.Columns(**layout_defaults),
+    layout.MonadWide(**layout_defaults),
 ]
 floating_layout = layout.Floating(
     **floating_defaults,

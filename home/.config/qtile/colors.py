@@ -2,7 +2,7 @@
 Color schemes live here
 """
 _gruvbox = {
-    "bg": "#282828",
+    "bg": "#162d44",
     "fg": "#d4be98",
     "dark-red": "#ea6962",
     "red": "#ea6962",

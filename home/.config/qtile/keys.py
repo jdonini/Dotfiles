@@ -22,6 +22,24 @@ keys = [
     Key([MOD_KEY], "j", lazy.layout.down(), desc="Move focus down"),
     Key([MOD_KEY], "k", lazy.layout.up(), desc="Move focus up"),
     # Move windows between left/right columns or move up/down in current stack.
+    Key(
+        [],
+        "XF86AudioPlay",
+        lazy.spawn("playerctl play-pause"),
+        desc="Play/Pause Spotify",
+    ),
+    Key(
+        [],
+        "XF86AudioNext",
+        lazy.spawn("playerctl next"),
+        desc="Skip to next",
+    ),
+    Key(
+        [],
+        "XF86AudioPrev",
+        lazy.spawn("playerctl previous"),
+        desc="Skip to previous",
+    ),
     # Moving out of range in Columns layout will create new column.
     Key(
         [MOD_KEY, "shift"],
@@ -84,6 +102,7 @@ keys = [
         lazy.spawn(RUN_APP_LAUNCHER_SHELL_CMD),
         desc="Run application launcher",
     ),
+    Key([MOD_KEY], "v", lazy.spawn("code"), desc="Launch Visual Studio Code"),
     Key(
         [MOD_KEY],
         "Print",

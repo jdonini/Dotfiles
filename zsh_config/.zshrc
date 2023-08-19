@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 export ZSH=$HOME/.oh-my-zsh
 
 ZSH_THEME="avit"
@@ -14,13 +16,37 @@ prompt_context(){}
 # npm
 export PATH=~/.npm-global/bin:$PATH
 
+# starship
+eval "$(starship init zsh)"
+
 # poetry
 export PATH="$HOME/.local/bin:$PATH"
+
+# anaconad
+# export PATH="/opt/anaconda/bin:$PATH"  # commented out by conda initialize
 
 # pyenv
 export PATH="$HOME/.pyenv/bin:$PATH"
 eval "$(pyenv init --path)"
 eval "$(pyenv init -)"
+
+SPACESHIP_PROMPT_ORDER=(
+  user          # Username section
+  dir           # Current directory section
+  host          # Hostname section
+  git           # Git section (git_branch + git_status)
+  hg            # Mercurial section (hg_branch  + hg_status)
+  exec_time     # Execution time
+  line_sep      # Line break
+  jobs          # Background jobs indicator
+  exit_code     # Exit code section
+  char          # Prompt character
+)
+SPACESHIP_USER_SHOW=always
+SPACESHIP_PROMPT_ADD_NEWLINE=false
+SPACESHIP_CHAR_SYMBOL="❯"
+SPACESHIP_CHAR_SUFFIX=" "
+
 
 ### Added by Zinit's installer
 if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
@@ -47,7 +73,7 @@ zinit light-mode for \
 
 zinit light zdharma/fast-syntax-highlighting
 zinit light zsh-users/zsh-autosuggestions
-zinit light zsh-users/zsh-completion
+#zinit light zsh-users/zsh-completion
 
 alias farmgo-web-build='$HOME/Workspace/farmgo-web; docker-compose up --build'
 alias farmgo-web-up='$HOME/Workspace/farmgo-web; docker-compose up'
@@ -65,6 +91,9 @@ alias farmgo-image-service-testf='$HOME/Workspace/farmgo-image-service; docker-c
 alias farmgo-image-service-covu='$HOME/Workspace/farmgo-image-service; docker-compose exec web python manage.py covu'
 alias farmgo-image-service-covi='$HOME/Workspace/farmgo-image-service; docker-compose exec web python manage.py covi'
 
+alias gamingmode="source gamingmode.sh" 
+alias focusmode="source focusmode.sh"
+
 alias change-zsh="code ~/.zshrc"
 alias update-zsh="source ~/.zshrc"
 
@@ -72,3 +101,27 @@ alias update="yay -Syyu"
 
 alias ll='colorls --group-directories-first --almost-all --long'
 alias l='colorls --group-directories-first --almost-all'
+
+alias mirrors="sudo reflector --verbose --latest 10 --sort rate --save /etc/pacman.d/mirrorlist"
+alias mirrors-br="sudo reflector --verbose --country Brazil --sort rate --save /etc/pacman.d/mirrorlist"
+
+alias computer-vision="conda activate computer-vision"
+alias automizei="conda activate automizei"
+alias farmgo-vision="conda activate farmgo-vision"
+alias conda-envs="conda info --envs"
+alias deactivate="conda deactivate"
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/opt/anaconda/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/opt/anaconda/etc/profile.d/conda.sh" ]; then
+        . "/opt/anaconda/etc/profile.d/conda.sh"
+    else
+        export PATH="/opt/anaconda/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
